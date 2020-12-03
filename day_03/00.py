@@ -1,4 +1,4 @@
-input_map = open("input.txt").read()
+input_map = open("input.txt").read().rstrip()
 
 example_map = """..##.......
 #...#...#..
@@ -27,4 +27,4 @@ def count_trees(some_map: list) -> int:
     return trees
 
 print("Example map:", count_trees(example_map), "met")
-# print("My input map:", count_trees(input_map), "met")
+print("My input map:", count_trees(input_map), "met")
