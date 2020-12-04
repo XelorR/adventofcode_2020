@@ -1,4 +1,5 @@
 import re
+from pprint import pprint
 
 INVALID_IDS = """eyr:1972 cid:100
 hcl:#18171d ecl:amb hgt:170 pid:186cm iyr:2018 byr:1926
@@ -101,7 +102,7 @@ def validate_id(id: dict) -> bool:
         and "hgt" in id
         and "iyr" in id
     ):
-        return (
+        if (
             check_pid(id["pid"])
             and check_byr(id["byr"])
             and check_ecl(id["ecl"])
@@ -109,8 +110,17 @@ def validate_id(id: dict) -> bool:
             and check_hcl(id["hcl"])
             and check_hgt(id["hgt"])
             and check_iyr(id["iyr"])
-        )
+        ):
+            print("\nValid:")
+            pprint(id)
+            return True
+        else:
+            print("\nInvalid:")
+            pprint(id)
+            return False
     else:
+        print("\nInvalid:")
+        pprint(id)
         return False
 
 
@@ -147,4 +157,4 @@ assert count_valid(parse_raw(INVALID_IDS)) == 0
 if __name__ == "__main__":
     INPUT = open("input.txt").read()
     input_data = parse_raw(INPUT)
-    print(count_valid(input_data))
+    print("\nTotal number of valid ids is", count_valid(input_data))
