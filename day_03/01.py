@@ -28,5 +28,15 @@ def count_trees(some_map: list, step_right: int, step_down: int) -> int:
     return trees
 
 
-print("Example map:", count_trees(example_map, step_right=3, step_down=1), "met")
-print("My input map:", count_trees(input_map, step_right=3, step_down=1), "met")
+def multiply_slopes(some_map: list) -> int:
+    return (
+        count_trees(some_map, 1, 1)
+        * count_trees(some_map, 3, 1)
+        * count_trees(some_map, 5, 1)
+        * count_trees(some_map, 7, 1)
+        * count_trees(some_map, 1, 2)
+    )
+
+
+print("Example map:", multiply_slopes(example_map), "in total")
+print("My input map:", multiply_slopes(input_map), "in total")
