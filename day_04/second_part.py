@@ -91,13 +91,6 @@ def check_pid(value: str) -> bool:
     return bool(re.match(r"\d{9}", value))
 
 
-def check_cid(value: str) -> bool:
-    """
-    cid (Country ID) - ignored, missing or not.
-    """
-    return True
-
-
 def validate_id(id: dict) -> bool:
     if (
         "pid" in id
