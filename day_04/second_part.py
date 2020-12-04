@@ -89,7 +89,7 @@ def check_pid(value: str) -> bool:
     """
     pid (Passport ID) - a nine-digit number, including leading zeroes.
     """
-    return bool(re.match(r"\d{9}", value))
+    return bool(re.match(r"^\d{9}$", value))
 
 
 def validate_id(id: dict) -> bool:
