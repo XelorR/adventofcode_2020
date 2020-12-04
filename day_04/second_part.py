@@ -158,5 +158,3 @@ if __name__ == "__main__":
     INPUT = open("input.txt").read()
     input_data = parse_raw(INPUT)
     print("\nTotal number of valid ids is", count_valid(input_data))
-    # it should be 167!
-    # but my result is 168...
