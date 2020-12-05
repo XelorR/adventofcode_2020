@@ -30,5 +30,13 @@ def print_decoded_ticket(ticket_to_print):
 print_decoded_ticket("BFFFBBFRRR")
 
 
-def generate_fullist():
-    pass
+def generate_full_list():
+    # let assume that B=0, F=1, L=0, R=1
+    bf = {"0": "B", "1": "F"}
+    lr = {"0": "L", "1": "R"}
+
+    bin_list = [bin(i)[2:].zfill(10) for i in range(1024)]
+    return ["".join([bf[i] for i in ticket[:7]] + [lr[i] for i in ticket[7:]]) for ticket in bin_list]
+
+
+all_possible_tickets = generate_full_list()
