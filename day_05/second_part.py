@@ -38,3 +38,8 @@ def generate_full_list():
 
 all_possible_tickets = generate_full_list()
 diff = set(all_possible_tickets) - set(INPUT)
+
+for i, t in enumerate(sorted([decode_ticket(t)[-1] for t in diff])):
+    if t != i:
+        print(f"Your ticket number is {t}!")
+        break
