@@ -20,4 +20,7 @@ def decode_ticket(ticket: str) -> int:
     return high * 8 + right
 
 
-print(decode_ticket("FBFBBFFRLR"))
+assert decode_ticket("FBFBBFFRLR") == 357
+assert decode_ticket("BFFFBBFRRR") == 567
+assert decode_ticket("FFFBBBFRRR") == 119
+assert decode_ticket("BBFFBBFRLL") == 820
