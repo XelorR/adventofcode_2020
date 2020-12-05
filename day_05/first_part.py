@@ -24,3 +24,5 @@ assert decode_ticket("FBFBBFFRLR") == 357
 assert decode_ticket("BFFFBBFRRR") == 567
 assert decode_ticket("FFFBBBFRRR") == 119
 assert decode_ticket("BBFFBBFRLL") == 820
+
+print(max([decode_ticket(t) for t in INPUT]))
