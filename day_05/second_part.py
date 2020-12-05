@@ -40,3 +40,4 @@ def generate_full_list():
 
 
 all_possible_tickets = generate_full_list()
+diff = set(all_possible_tickets) - set(INPUT)
