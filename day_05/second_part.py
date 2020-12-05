@@ -27,9 +27,6 @@ def print_decoded_ticket(ticket_to_print):
     print(f"Ticket: {ticket_to_print}, row: {row}, column: {column}, seat ID: {seat_id}")
 
 
-print_decoded_ticket("BFFFBBFRRR")
-
-
 def generate_full_list():
     # let assume that B=0, F=1, L=0, R=1
     bf = {"0": "B", "1": "F"}
