@@ -32,4 +32,5 @@ def count_everyone_answers(single_group: list):
         return len(first_member)
 
 
+assert sum(count_everyone_answers(group) for group in parse_input(EXAMPLE)) == 6
 print(sum(count_everyone_answers(group) for group in parse_input(INPUT)))
