@@ -21,7 +21,7 @@ def parse_raw(data_raw: str) -> dict:
     for row in data_list:
         current_bag, other_bags = row.split(" bags contain ")
         if other_bags == "no other bags.":
-            out[current_bag] = 0
+            out[current_bag] = {}
         else:
             out[current_bag] = {re.sub(r" bag.*$", "", bag)[2:]: int(
                 re.sub(r" bag.*$", "", bag)[0]) for bag in
@@ -29,19 +29,7 @@ def parse_raw(data_raw: str) -> dict:
     return out
 
 
-pprint(parse_raw(EXAMPLE))
+example_data = parse_raw(EXAMPLE)
+input_data = parse_raw(INPUT)
 
-
-def count_bags(data: dict, bag_to_find: str = "shiny gold") -> int:
-
-    count = 0
-    for bag, inside in data.items():
-        if bag_to_find in inside:
-            count += 1
-        elif inside != 0:
-            count += count_bags(data, bag)
-
-        return count
-
-
-print(count_bags(parse_raw(EXAMPLE)))
+pprint(example_data)
