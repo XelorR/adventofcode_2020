@@ -1,5 +1,4 @@
 import re
-from itertools import chain
 from pprint import pprint
 
 EXAMPLE = """light red bags contain 1 bright white bag, 2 muted yellow bags.
@@ -31,3 +30,18 @@ def parse_raw(data_raw: str) -> dict:
 
 
 pprint(parse_raw(EXAMPLE))
+
+
+def count_bags(data: dict, bag_to_find: str = "shiny gold") -> int:
+
+    count = 0
+    for bag, inside in data.items():
+        if bag_to_find in inside:
+            count += 1
+        elif inside != 0:
+            count += count_bags(data, bag)
+
+        return count
+
+
+print(count_bags(parse_raw(EXAMPLE)))
