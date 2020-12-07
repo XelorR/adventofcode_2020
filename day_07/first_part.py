@@ -22,12 +22,11 @@ def parse_raw(data_raw: str) -> dict:
     for row in data_list:
         current_bag, other_bags = row.split(" bags contain ")
         if other_bags == "no other bags.":
-            out[current_bag] = []
+            out[current_bag] = 0
         else:
-            out[current_bag] = [b for b in
-                                chain(*[[re.sub(r" bag.*$", "", bag)[2:]] * int(
-                                    re.sub(r" bag.*$", "", bag)[0]) for bag in
-                                        other_bags.split(", ")])]
+            out[current_bag] = {re.sub(r" bag.*$", "", bag)[2:]: int(
+                re.sub(r" bag.*$", "", bag)[0]) for bag in
+                other_bags.split(", ")}
     return out
 
 
