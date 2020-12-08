@@ -70,10 +70,10 @@ class BootLoader:
             func(argument)
 
 
-example_loader = BootLoader(parse_raw(EXAMPLE))
+example_loader = BootLoader(example_data)
 example_loader.execute()
-print(example_loader.accumulator)
+assert example_loader.accumulator == 5
 
-input_loader = BootLoader(parse_raw(INPUT))
+input_loader = BootLoader(input_data)
 input_loader.execute()
-print(input_loader.accumulator)
+print("Accumulator value before infinite loop is", input_loader.accumulator)
