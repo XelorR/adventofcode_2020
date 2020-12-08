@@ -65,8 +65,7 @@ class BootLoader:
 
             if self.position in self.executed_positions:
                 break
-            else:
-                self.executed_positions.append(self.position)
+            self.executed_positions.append(self.position)
             func(argument)
 
 
