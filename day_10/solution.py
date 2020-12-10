@@ -44,3 +44,7 @@ LARGER_EXAMPLE = ("28\n"
 
 with open("input.txt", "r") as input_file:
     INPUT = input_file.read().strip()
+
+
+def parse_raw(raw_data: str) -> list:
+    return [int(adapter) for adapter in raw_data.strip().splitlines()]
