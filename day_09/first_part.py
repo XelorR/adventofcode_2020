@@ -41,3 +41,17 @@ def find_first_error(data_raw, length_to_check=5):
 
 assert find_first_error(EXAMPLE) == 127
 print(find_first_error(INPUT, 25))
+
+
+def part_two(data_raw, length_to_check=5):
+    data = parse_raw(data_raw)
+    first_error = find_first_error(data_raw, length_to_check)
+    for i, a in enumerate(data):
+        for j, b in enumerate(data):
+            current_range = data[i:j + 1]
+            if j > i and first_error == sum(current_range):
+                return max(current_range) + min(current_range)
+
+
+assert part_two(EXAMPLE) == 62
+print(part_two(INPUT, 25))
