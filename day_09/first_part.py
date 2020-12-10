@@ -27,7 +27,7 @@ def parse_raw(data_raw: str) -> list:
     return [int(e) for e in data_raw.splitlines()]
 
 
-def find_first_error(data_raw, length_to_check=5):
+def part_one(data_raw, length_to_check=5):
     for index, elem in enumerate(parse_raw(data_raw)[length_to_check:]):
         prev_five = parse_raw(data_raw)[index: index + length_to_check]
         check = False
@@ -39,13 +39,13 @@ def find_first_error(data_raw, length_to_check=5):
             return elem
 
 
-assert find_first_error(EXAMPLE) == 127
-print(find_first_error(INPUT, 25))
+assert part_one(EXAMPLE) == 127
+print("First error in XMAS protocol (first part answer) is:", part_one(INPUT, 25))
 
 
 def part_two(data_raw, length_to_check=5):
     data = parse_raw(data_raw)
-    first_error = find_first_error(data_raw, length_to_check)
+    first_error = part_one(data_raw, length_to_check)
     for i, a in enumerate(data):
         for j, b in enumerate(data):
             current_range = data[i:j + 1]
@@ -54,4 +54,4 @@ def part_two(data_raw, length_to_check=5):
 
 
 assert part_two(EXAMPLE) == 62
-print(part_two(INPUT, 25))
+print("Encryption weakness in XMAS protocol (second part answer) is:", part_two(INPUT, 25))
