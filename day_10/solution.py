@@ -48,3 +48,23 @@ with open("input.txt", "r") as input_file:
 
 def parse_raw(raw_data: str) -> list:
     return [int(adapter) for adapter in raw_data.strip().splitlines()]
+
+
+def part_one_diff_counts(raw_data: str) -> dict:
+    data = sorted(parse_raw(raw_data))
+    full_data = [0] + data + [(max(data) + 3)]
+    diffs = {}
+    for i, e in enumerate(full_data[1:]):
+        diff = e - full_data[i]
+        if diff in diffs:
+            diffs[diff] += 1
+        else:
+            diffs[diff] = 1
+    return diffs
+
+
+assert part_one_diff_counts(EXAMPLE) == {1: 7, 3: 5}
+assert part_one_diff_counts(LARGER_EXAMPLE) == {1: 22, 3: 10}
+
+counts = part_one_diff_counts(INPUT)
+print("Part one answer is:", counts[1] * counts[3])
