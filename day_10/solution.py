@@ -68,3 +68,24 @@ assert part_one_diff_counts(LARGER_EXAMPLE) == {1: 22, 3: 10}
 
 counts = part_one_diff_counts(INPUT)
 print("Part one answer is:", counts[1] * counts[3])
+
+
+def part_two_variations_count(raw_data):
+    data = parse_raw(raw_data)
+    full_data = sorted(data) + [max(data)]
+    ways = {0: 1}
+    for adapter in sorted(full_data):
+        ways[adapter] = 0
+        if adapter - 1 in ways:
+            ways[adapter] += ways[adapter - 1]
+        if adapter - 2 in ways:
+            ways[adapter] += ways[adapter - 2]
+        if adapter - 3 in ways:
+            ways[adapter] += ways[adapter - 3]
+    return ways[max(full_data)]
+
+
+assert part_two_variations_count(EXAMPLE) == 8
+assert part_two_variations_count(LARGER_EXAMPLE) == 19208
+
+print("Part two answer is:", part_two_variations_count(INPUT))
