@@ -18,3 +18,15 @@ class Ferry:
         self.data = [[position for position in row] for row in data_raw.splitlines()]
         self.width = len(self.data[0])
         self.length = len(self.data)
+
+    def __get_seats_left(self, row: int, column: int) -> list:
+        if column <= 8:
+            return self.data[row][:column]
+        else:
+            return self.data[row][column - 8:column]
+
+    def __get_seats_right(self, row: int, column: int) -> list:
+        if self.width - column <= 9:
+            return self.data[row][column + 1:]
+        else:
+            return self.data[row][column + 1:column + 9]
