@@ -30,3 +30,15 @@ class Ferry:
             return self.data[row][column + 1:]
         else:
             return self.data[row][column + 1:column + 9]
+
+    def __get_seats_up(self, row: int, column: int) -> list:
+        if row <= 8:
+            return [seat[column] for seat in self.data[:row]]
+        else:
+            return [seat[column] for seat in self.data[row - 8:row]]
+
+    def __get_seats_down(self, row: int, column: int) -> list:
+        if self.length - row <= 9:
+            return [seat[column] for seat in self.data[row + 1:]]
+        else:
+            return [seat[column] for seat in self.data[row + 1:row + 9]]
