@@ -49,3 +49,8 @@ class Ferry:
 example_ferry = Ferry(EXAMPLE)
 example_ferry.switch_seats()
 assert example_ferry.occupied == 37
+
+input_ferry = Ferry(INPUT)
+input_ferry.switch_seats()
+print("There are", input_ferry.occupied,
+      "occupied seats in our input ferry (part one solution)")
