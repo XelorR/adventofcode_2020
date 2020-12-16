@@ -23,7 +23,7 @@ class Ferry:
         self.length = len(self.data)
         self.occupied = 0
 
-    def count_adjacent_seats(self, row: int, column: int) -> int:
+    def count_occupied_adjacent_seats(self, row: int, column: int) -> int:
         data = chain(*[seat[max([0, column - 1]):min(self.width, column + 2)] for seat in
                        self.data[max([0, row - 1]):min(self.length, row + 2)]])
         return sum(s == "#" for s in data) - int(self.data[row][column] == "#")
@@ -33,7 +33,7 @@ class Ferry:
             data_current = deepcopy(self.data)
             for i, row in enumerate(self.data):
                 for j, seat in enumerate(row):
-                    occupied_nearby = self.count_adjacent_seats(i, j)
+                    occupied_nearby = self.count_occupied_adjacent_seats(i, j)
                     if occupied_nearby == 0 and seat == "L":
                         data_current[i][j] = "#"
                     elif occupied_nearby >= 4 and seat == "#":
