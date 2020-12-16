@@ -1,3 +1,4 @@
+from itertools import chain
 from pprint import pprint
 from typing import List
 
@@ -93,6 +94,11 @@ class Ferry:
             current_row += 1
             current_column -= 1
         return seats
+
+    def count_occupied_adjacent_seats(self, row: int, column: int):
+        data = [seats[max(column - 1, 0):min(column + 2, self.width)] for seats in
+                self.data[max([row - 1, 0]): min([row + 2, self.length])]]
+        return sum(s == "#" for i, s in enumerate(chain(*data)) if i != 4)
 
 
 example_ferry = Ferry(EXAMPLE)
