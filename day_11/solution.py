@@ -45,6 +45,9 @@ class Ferry:
         else:
             return [seat[column] for seat in self.data[row + 1:row + 9]]
 
+    def get_seats_up_left(self, row: int, column: int) -> list:
+        raise NotImplementedError
+
 
 example_ferry = Ferry(EXAMPLE)
 pprint(example_ferry.data)
