@@ -1,3 +1,5 @@
+from pprint import pprint
+
 EXAMPLE = """L.LL.LL.LL
 LLLLLLL.LL
 L.L.L..L..
@@ -42,3 +44,8 @@ class Ferry:
             return [seat[column] for seat in self.data[row + 1:]]
         else:
             return [seat[column] for seat in self.data[row + 1:row + 9]]
+
+
+example_ferry = Ferry(EXAMPLE)
+pprint(example_ferry.data)
+print(example_ferry.get_seats_up(row=9, column=9))
