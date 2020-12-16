@@ -1,3 +1,5 @@
+from itertools import chain
+
 EXAMPLE = """L.LL.LL.LL
 LLLLLLL.LL
 L.L.L..L..
@@ -18,3 +20,8 @@ class Ferry:
         self.data = [[position for position in row] for row in data_raw.splitlines()]
         self.width = len(self.data[0])
         self.length = len(self.data)
+
+    def count_adjacent_seats(self, row: int, column: int) -> int:
+        data = chain(*[seat[max([0, column - 1]):min(self.width, column + 2)] for seat in
+                       self.data[max([0, row - 1]):min(self.length, row + 2)]])
+        return sum(s == "#" for s in data) - int(self.data[row][column] == "#")
