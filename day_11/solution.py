@@ -61,3 +61,4 @@ class Ferry:
 example_ferry = Ferry(EXAMPLE)
 pprint(example_ferry.data)
 print(example_ferry.get_seats_up(row=9, column=9))
+print(example_ferry.get_seats_up_left(3, 3))
