@@ -47,14 +47,15 @@ class Ferry:
             return [seat[column] for seat in self.data[row + 1:row + 9]]
 
     def get_seats_up_left(self, row: int, column: int) -> list:
-        if row <= 8 and column <= 8:
-            seats: List[str] = []
-            current_row = row - 1
-            current_column = column - 1
-            for _ in range(min(current_row, current_column), -1, -1):
-                seats.append(self.data[current_row][current_column])
-                current_row -= 1
-                current_column -= 1
+        seats: List[str] = []
+        current_row = row - 1
+        current_column = column - 1
+        start_pos = min(current_row, current_column)
+        end_pos = max([-1, start_pos - 8])
+        for _ in range(start_pos, end_pos, -1):
+            seats.append(self.data[current_row][current_column])
+            current_row -= 1
+            current_column -= 1
         return seats
 
 
