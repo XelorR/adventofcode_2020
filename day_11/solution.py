@@ -58,6 +58,18 @@ class Ferry:
             current_column -= 1
         return seats
 
+    def get_seats_down_right(self, row: int, column: int) -> list:
+        seats: List[str] = []
+        current_row = row + 1
+        current_column = column + 1
+        while True:
+            if current_row == self.length or current_column == self.width:
+                break
+            seats.append(self.data[current_row][current_column])
+            current_row += 1
+            current_column += 1
+        return seats
+
 
 example_ferry = Ferry(EXAMPLE)
 pprint(example_ferry.data)
