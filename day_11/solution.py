@@ -1,4 +1,5 @@
 from pprint import pprint
+from typing import List
 
 EXAMPLE = """L.LL.LL.LL
 LLLLLLL.LL
@@ -46,7 +47,15 @@ class Ferry:
             return [seat[column] for seat in self.data[row + 1:row + 9]]
 
     def get_seats_up_left(self, row: int, column: int) -> list:
-        raise NotImplementedError
+        if row <= 8 and column <= 8:
+            seats: List[str] = []
+            current_row = row - 1
+            current_column = column - 1
+            for _ in range(min(current_row, current_column), -1, -1):
+                seats.append(self.data[current_row][current_column])
+                current_row -= 1
+                current_column -= 1
+        return seats
 
 
 example_ferry = Ferry(EXAMPLE)
