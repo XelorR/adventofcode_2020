@@ -33,7 +33,7 @@ class Ferry:
                        self.data[max([0, row - 1]):min(self.length, row + 2)]])
         return sum(s == "#" for s in data) - int(self.data[row][column] == "#")
 
-    def switch_seats(self):
+    def switch_seats(self, tolerance=4):
         while True:
             data_current = deepcopy(self.data)
             for i, row in enumerate(self.data):
@@ -41,7 +41,7 @@ class Ferry:
                     occupied_nearby = self.count_occupied_adjacent_seats(i, j)
                     if occupied_nearby == 0 and seat == "L":
                         data_current[i][j] = "#"
-                    elif occupied_nearby >= 4 and seat == "#":
+                    elif occupied_nearby >= tolerance and seat == "#":
                         data_current[i][j] = "L"
             if data_current != self.data:
                 self.data = deepcopy(data_current)
