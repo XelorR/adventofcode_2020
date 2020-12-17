@@ -56,6 +56,15 @@ def get_diagonal(list_of_lists: list):
             i < min([len(list_of_lists), len(list_of_lists[0])])]
 
 
+def check_direction(arr: list):
+    for i in arr:
+        if i == "#":
+            return 1
+        elif i == "L":
+            return 0
+    return 0
+
+
 class FerryPartTwo(Ferry):
 
     def count_occupied_adjacent_seats(self, row: int, column: int) -> int:
@@ -77,6 +86,10 @@ class FerryPartTwo(Ferry):
         down_right = get_diagonal([r[column + 1:] for r in
                                    self.data[
                                    row + 1:]]) if self.length > row + 1 and column + 1 < self.width else []
+
+        return sum(
+            map(check_direction, [up, down, left, right, up_left, up_right, down_right,
+                                  down_left]))
 
 
 example_ferry = Ferry(EXAMPLE)
