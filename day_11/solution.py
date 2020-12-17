@@ -51,6 +51,26 @@ class Ferry:
                 break
 
 
+def get_diagonal(list_of_lists: list):
+    return [elem[i] for i, elem in enumerate(list_of_lists) if
+            i < min([len(list_of_lists), len(list_of_lists[0])])]
+
+
+class FerryPartTwo(Ferry):
+
+    def count_occupied_adjacent_seats(self, row: int, column: int) -> int:
+        horizontal = [s for i, s in enumerate(self.data[row]) if i != column]
+        vertical = [s[column] for i, s in enumerate(self.data) if i != row]
+
+        up = vertical[:row].reverse()
+        down = vertical[row:] if row < len(vertical) else []
+        left = horizontal[:column].reverse()
+        right = horizontal[column:] if column < len(horizontal) else []
+
+        up_left = get_diagonal([reversed(r[:column]) for r in reversed(
+            self.data[:row])]) if column > 0 and row > 0 else []
+
+
 example_ferry = Ferry(EXAMPLE)
 example_ferry.switch_seats()
 assert example_ferry.occupied == 37
