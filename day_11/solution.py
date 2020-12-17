@@ -69,6 +69,14 @@ class FerryPartTwo(Ferry):
 
         up_left = get_diagonal([reversed(r[:column]) for r in reversed(
             self.data[:row])]) if column > 0 and row > 0 else []
+        up_right = get_diagonal([r[column + 1] for r in reversed(
+            self.data[:row])]) if column + 1 < self.width and row > 0 else []
+        down_left = get_diagonal(
+            [reversed(r[:column]) for r in
+             self.data[row + 1:]]) if column > 0 and self.length > row + 1 else []
+        down_right = get_diagonal([r[column + 1:] for r in
+                                   self.data[
+                                   row + 1:]]) if self.length > row + 1 and column + 1 < self.width else []
 
 
 example_ferry = Ferry(EXAMPLE)
