@@ -62,8 +62,6 @@ def get_diagonal(list_of_lists: list):
 
 
 def check_direction(arr: list):
-    if arr is None:
-        return 0
     for i in arr:
         if i == "#":
             return 1
