@@ -52,11 +52,14 @@ class Ferry:
 
 
 def get_diagonal(list_of_lists: list):
+    list_of_lists = [[s for s in r] for r in list_of_lists]
     return [elem[i] for i, elem in enumerate(list_of_lists) if
             i < min([len(list_of_lists), len(list_of_lists[0])])]
 
 
 def check_direction(arr: list):
+    if arr is None:
+        return 0
     for i in arr:
         if i == "#":
             return 1
@@ -71,9 +74,9 @@ class FerryPartTwo(Ferry):
         horizontal = [s for i, s in enumerate(self.data[row]) if i != column]
         vertical = [s[column] for i, s in enumerate(self.data) if i != row]
 
-        up = vertical[:row].reverse()
+        up = vertical[:row].reverse() if row != 0 else []
         down = vertical[row:] if row < len(vertical) else []
-        left = horizontal[:column].reverse()
+        left = horizontal[:column].reverse() if column > 0 else []
         right = horizontal[column:] if column < len(horizontal) else []
 
         up_left = get_diagonal([reversed(r[:column]) for r in reversed(
