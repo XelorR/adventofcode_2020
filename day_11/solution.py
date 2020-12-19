@@ -103,10 +103,10 @@ example_ferry = Ferry(EXAMPLE)
 example_ferry.switch_seats()
 assert example_ferry.occupied == 37
 
-input_ferry = Ferry(INPUT)
-input_ferry.switch_seats()
-print("There are", input_ferry.occupied,
-      "occupied seats in our input ferry (part one solution)")
+# input_ferry = Ferry(INPUT)
+# input_ferry.switch_seats()
+# print("There are", input_ferry.occupied,
+#       "occupied seats in our input ferry (part one solution)")
 
 example_ferry_part2 = FerryPartTwo(EXAMPLE)
 example_ferry_part2.switch_seats(5)
