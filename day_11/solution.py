@@ -1,6 +1,5 @@
 from copy import deepcopy
 from itertools import chain
-from pprint import pprint
 
 EXAMPLE = """L.LL.LL.LL
 LLLLLLL.LL
@@ -44,14 +43,11 @@ class Ferry:
                         data_current[i][j] = "#"
                     elif occupied_nearby >= tolerance and seat == "#":
                         data_current[i][j] = "L"
-            pprint(data_current)
             if data_current != self.data:
                 self.data = deepcopy(data_current)
                 self.occupied = sum(s == "#" for s in chain(*self.data))
-                print(self.occupied)
             else:
                 self.occupied = sum(s == "#" for s in chain(*self.data))
-                print(self.occupied)
                 break
 
 
@@ -101,10 +97,10 @@ example_ferry = Ferry(EXAMPLE)
 example_ferry.switch_seats()
 assert example_ferry.occupied == 37
 
-# input_ferry = Ferry(INPUT)
-# input_ferry.switch_seats()
-# print("There are", input_ferry.occupied,
-#       "occupied seats in our input ferry (part one solution)")
+input_ferry = Ferry(INPUT)
+input_ferry.switch_seats()
+print("There are", input_ferry.occupied,
+      "occupied seats in our input ferry (part one solution)")
 
 example_ferry_part2 = FerryPartTwo(EXAMPLE)
 example_ferry_part2.switch_seats(5)
