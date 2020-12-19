@@ -78,9 +78,9 @@ class FerryPartTwo(Ferry):
         horizontal = [s for i, s in enumerate(self.data[row]) if i != column]
         vertical = [s[column] for i, s in enumerate(self.data) if i != row]
 
-        up = vertical[:row].reverse() if row != 0 else []
+        up = reversed(vertical[:row]) if row != 0 else []
         down = vertical[row:] if row < len(vertical) else []
-        left = horizontal[:column].reverse() if column > 0 else []
+        left = reversed(horizontal[:column]) if column > 0 else []
         right = horizontal[column:] if column < len(horizontal) else []
 
         up_left = get_diagonal([reversed(r[:column]) for r in reversed(
