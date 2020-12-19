@@ -44,11 +44,14 @@ class Ferry:
                         data_current[i][j] = "#"
                     elif occupied_nearby >= tolerance and seat == "#":
                         data_current[i][j] = "L"
+            pprint(data_current)
             if data_current != self.data:
                 self.data = deepcopy(data_current)
                 self.occupied = sum(s == "#" for s in chain(*self.data))
+                print(self.occupied)
             else:
                 self.occupied = sum(s == "#" for s in chain(*self.data))
+                print(self.occupied)
                 break
 
 
@@ -109,4 +112,3 @@ example_ferry_part2 = FerryPartTwo(EXAMPLE)
 example_ferry_part2.switch_seats(5)
 pprint(example_ferry_part2.data)
 print(example_ferry_part2.occupied)
-
