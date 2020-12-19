@@ -108,5 +108,9 @@ assert example_ferry.occupied == 37
 
 example_ferry_part2 = FerryPartTwo(EXAMPLE)
 example_ferry_part2.switch_seats(5)
-pprint(example_ferry_part2.data)
-print(example_ferry_part2.occupied)
+assert example_ferry_part2.occupied == 26
+
+input_ferry_part_two = FerryPartTwo(INPUT)
+input_ferry_part_two.switch_seats(5)
+print("There are", input_ferry_part_two.occupied,
+      "occupied seats in our input ferry (part two solution)")
