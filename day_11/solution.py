@@ -1,5 +1,6 @@
 from copy import deepcopy
 from itertools import chain
+from pprint import pprint
 
 EXAMPLE = """L.LL.LL.LL
 LLLLLLL.LL
@@ -103,3 +104,9 @@ input_ferry = Ferry(INPUT)
 input_ferry.switch_seats()
 print("There are", input_ferry.occupied,
       "occupied seats in our input ferry (part one solution)")
+
+example_ferry_part2 = FerryPartTwo(EXAMPLE)
+example_ferry_part2.switch_seats(5)
+pprint(example_ferry_part2.data)
+print(example_ferry_part2.occupied)
+
