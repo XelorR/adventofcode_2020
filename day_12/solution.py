@@ -11,8 +11,9 @@ with open("input.txt", "r") as input_file:
 
 
 class Ship:
-    def __init__(self, raw_data: str):
+    def __init__(self, raw_data: str, facing: str = "E"):
         self.data = (re.findall(r"(\w+)(\d+)", comm)[0] for comm in raw_data.splitlines())
+        self.facing = facing
 
 
 example_ship = Ship(EXAMPLE)
