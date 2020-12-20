@@ -64,3 +64,9 @@ example_ship = Ship(EXAMPLE)
 example_ship.move_full_path()
 x, y = example_ship.coordinates_xy
 assert abs(x) + abs(y) == 25
+
+input_ship = Ship(INPUT)
+input_ship.move_full_path()
+x, y = input_ship.coordinates_xy
+print("Manhattan distance from initial position is", abs(x) + abs(y),
+      "(part one solution)")
