@@ -14,7 +14,9 @@ class Ship:
     def __init__(self, raw_data: str, facing: str = "E"):
         self.data = (re.findall(r"([A-Z]+)(\d+)", comm)[0] for comm in
                      raw_data.splitlines())
+        self.directions = ["N", "E", "S", "W"]
         self.facing = facing
+        self.facing_index = [i for i, d in enumerate(self.directions) if d == facing][0]
         self.coordinates_xy = [0, 0]
         self.movements = {
             "E": self.__move_east,
@@ -52,7 +54,10 @@ class Ship:
 
     def rotate(self, command: tuple):
         comm = command[0]
-        units = int(command[1])
+        degrees = int(command[1])
+        step = degrees // 90
+        self.facing_index = (self.facing_index + step) % 4
+        self.facing = self.directions[self.facing_index]
 
 
 example_ship = Ship(EXAMPLE)
