@@ -180,4 +180,15 @@ print("\nPart two")
 example_ship_part_two = ShipToWaypoint(EXAMPLE)
 example_ship_part_two.move_full_path()
 x, y = example_ship_part_two.coordinates_xy
-print(abs(x) + abs(y))
+assert abs(x) + abs(y) == 286
+
+print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+
+input_ship_part_two = ShipToWaypoint(INPUT)
+input_ship_part_two.move_full_path()
+x, y = input_ship_part_two.coordinates_xy
+print(
+    "Manhattan distance from initial position is",
+    abs(x) + abs(y),
+    "(part two solution)",
+)
