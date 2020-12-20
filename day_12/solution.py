@@ -132,7 +132,7 @@ class ShipToWaypoint(Ship):
         comm = command[0]
         degrees = int(command[1])
 
-        for _ in range(360 // degrees):
+        for _ in range(90 // degrees):
             relative_x = self.waypoint[0] - self.coordinates_xy[0]
             relative_y = self.waypoint[1] - self.coordinates_xy[1]
             relative_x, relative_y = self.rotate_simple_case(comm, relative_x, relative_y)
