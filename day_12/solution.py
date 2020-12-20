@@ -78,7 +78,13 @@ class ShipToWaypoint(Ship):
         }
 
     def move_ship(self, command: tuple):
-        super().move(command)
+        n_times = int(command[1])
+        relative_x = (self.waypoint[0] - self.coordinates_xy[0]) * n_times
+        relative_y = (self.waypoint[1] - self.coordinates_xy[1]) * n_times
+        self.coordinates_xy[0] += relative_x
+        self.coordinates_xy[1] += relative_y
+        self.waypoint[0] += relative_x
+        self.waypoint[1] += relative_y
 
     def __move_waypoint_east(self, units: int):
         self.waypoint[0] += units
@@ -127,13 +133,13 @@ class ShipToWaypoint(Ship):
         degrees = int(command[1])
 
         for _ in range(360 // degrees):
-            x_waypoint = self.waypoint[0] - self.coordinates_xy[0]
-            y_waypoint = self.waypoint[1] - self.coordinates_xy[1]
-            x_waypoint, y_waypoint = self.rotate_simple_case(comm, x_waypoint, y_waypoint)
+            relative_x = self.waypoint[0] - self.coordinates_xy[0]
+            relative_y = self.waypoint[1] - self.coordinates_xy[1]
+            relative_x, relative_y = self.rotate_simple_case(comm, relative_x, relative_y)
 
             # converting relative coordinates back to absolute
-            self.waypoint[0] = x_waypoint + self.coordinates_xy[0]
-            self.waypoint[1] = y_waypoint + self.coordinates_xy[1]
+            self.waypoint[0] = relative_x + self.coordinates_xy[0]
+            self.waypoint[1] = relative_y + self.coordinates_xy[1]
 
             self.facing_index = (
                 (self.facing_index + 1) % 4
@@ -145,14 +151,11 @@ class ShipToWaypoint(Ship):
     def move_full_path(self):
         for command in self.data:
             if command[0] in "NWSE":
-                # move waypoint
-                raise NotImplementedError
+                self.move_waypoint(command)
             elif command[0] in "FB":
-                # move ship to waypoint N times = given value * waypoint value
-                raise NotImplementedError
+                self.move_ship((self.facing, command[1]))
             elif command[0] in "LR":
-                # rotate waypoint around the ship
-                raise NotImplementedError
+                self.rotate(command)
 
 
 example_ship = Ship(EXAMPLE)
@@ -170,3 +173,8 @@ print(
     abs(x) + abs(y),
     "(part one solution)",
 )
+
+example_ship_part_two = ShipToWaypoint(EXAMPLE)
+example_ship_part_two.move_full_path()
+x, y = example_ship_part_two.coordinates_xy
+print(abs(x) + abs(y))
