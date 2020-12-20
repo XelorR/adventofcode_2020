@@ -15,6 +15,12 @@ class Ship:
         self.data = (re.findall(r"(\w+)(\d+)", comm)[0] for comm in raw_data.splitlines())
         self.facing = facing
 
+    def move(self):
+        return NotImplementedError
+
+    def rotate(self):
+        raise NotImplementedError
+
 
 example_ship = Ship(EXAMPLE)
 print(list(example_ship.data))
