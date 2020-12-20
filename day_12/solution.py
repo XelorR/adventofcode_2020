@@ -65,6 +65,54 @@ class Ship:
         self.facing = self.directions[self.facing_index]
 
 
+class ShipToWaypoint(Ship):
+
+    def __init__(self, raw_data: str, facing: str = "E"):
+        super().__init__(raw_data, facing)
+        self.waypoint = [10, 1]
+        self.waypoint_movements = {
+            "E": self.__move_waypoint_east,
+            "W": self.__move_waypoint_west,
+            "N": self.__move_waypoint_north,
+            "S": self.__move_waypoint_south,
+        }
+
+    def move_ship(self, command: tuple):
+        super().move(command)
+
+    def __move_waypoint_east(self, units: int):
+        self.waypoint[0] += units
+
+    def __move_waypoint_west(self, units: int):
+        self.waypoint[0] -= units
+
+    def __move_waypoint_north(self, units: int):
+        self.waypoint[1] += units
+
+    def __move_waypoint_south(self, units: int):
+        self.waypoint[1] -= units
+
+    def move_waypoint(self, command: tuple):
+        comm = command[0]
+        units = int(command[1])
+        self.waypoint_movements[comm](units)
+
+    def rotate(self, command: tuple):
+        raise NotImplementedError
+
+    def move_full_path(self):
+        for command in self.data:
+            if command[0] in "NWSE":
+                # move waypoint
+                raise NotImplementedError
+            elif command[0] in "FB":
+                # move ship to waypoint N times = given value * waypoint value
+                raise NotImplementedError
+            elif command[0] in "LR":
+                # rotate waypoint around the ship
+                raise NotImplementedError
+
+
 example_ship = Ship(EXAMPLE)
 example_ship.move_full_path()
 x, y = example_ship.coordinates_xy
