@@ -62,4 +62,5 @@ class Ship:
 
 example_ship = Ship(EXAMPLE)
 example_ship.move_full_path()
-print(example_ship.coordinates_xy)
+x, y = example_ship.coordinates_xy
+assert abs(x) + abs(y) == 25
