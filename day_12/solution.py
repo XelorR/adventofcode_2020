@@ -97,8 +97,46 @@ class ShipToWaypoint(Ship):
         units = int(command[1])
         self.waypoint_movements[comm](units)
 
+    def rotate_simple_case(self, direction: str, x: int, y: int):
+        if self.facing == "N" and direction == "R":
+            return y, x
+        elif self.facing == "N" and direction == "L":
+            return -y, x
+        elif self.facing == "W" and direction == "R":
+            return y, -x
+        elif self.facing == "W" and direction == "L":
+            return y, x
+        elif self.facing == "S" and direction == "R":
+            return y, x
+        elif self.facing == "S" and direction == "L":
+            return -y, x
+        elif self.facing == "E" and direction == "R":
+            return y, -x
+        elif self.facing == "E" and direction == "L":
+            return y, x
+
     def rotate(self, command: tuple):
-        raise NotImplementedError
+        """
+        rotates WAYPOINT instead of ship
+        """
+        comm = command[0]
+        degrees = int(command[1])
+
+        for _ in range(360 // degrees):
+            self.facing_index = (
+                (self.facing_index + 1) % 4
+                if comm == "R"
+                else (self.facing_index - 1) % 4
+            )
+            self.facing = self.directions[self.facing_index]
+
+            x_waypoint = self.waypoint[0] - self.coordinates_xy[0]
+            y_waypoint = self.waypoint[1] - self.coordinates_xy[1]
+            x_waypoint, y_waypoint = self.rotate_simple_case(comm, x_waypoint, y_waypoint)
+
+            # converting relative coordinates back to absolute
+            self.waypoint[0] = x_waypoint + self.coordinates_xy[0]
+            self.waypoint[1] = y_waypoint + self.coordinates_xy[1]
 
     def move_full_path(self):
         for command in self.data:
