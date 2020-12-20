@@ -103,30 +103,19 @@ class ShipToWaypoint(Ship):
         units = int(command[1])
         self.waypoint_movements[comm](units)
 
-    def rotate_simple_case(self, direction: str, x: int, y: int):
+    def rotate_simple_case(self, direction: str, degrees: int, x: int, y: int):
         """
         Rotates one pair of coordinates around (0, 0)
-        Always rotates 90 degrees left or right, depending on current self.facing
         """
-        if x >= 0 and y >= 0 and direction == "R":
-            return x, -y
-        elif x >= 0 and y >= 0 and direction == "L":
-            return -x, y
-        elif x < 0 <= y and direction == "R":
-            return -x, y
-        elif x < 0 <= y and direction == "L":
-            return x, -y
-        elif x < 0 and y < 0 and direction == "R":
-            return x, -y
-        elif x < 0 and y < 0 and direction == "L":
-            return -x, y
-        elif x >= 0 > y and direction == "R":
-            return -x, y
-        elif x >= 0 > y and direction == "L":
-            return x, -y
-        else:
-            print(x, y)
-            raise TypeError
+        right = 1 if direction == "R" else -1
+
+        rotating_strategies = {90: [y * right, -x * right]}
+        rotating_strategies[180] = [rotating_strategies[90][1] * right,
+                                    -rotating_strategies[90][0] * right]
+        rotating_strategies[270] = [rotating_strategies[180][1] * right,
+                                    -rotating_strategies[180][0] * right]
+        x, y = rotating_strategies[degrees]
+        return x, y
 
     def rotate(self, command: tuple):
         """
@@ -135,15 +124,16 @@ class ShipToWaypoint(Ship):
         comm = command[0]
         degrees = int(command[1])
 
+        relative_x = self.waypoint[0] - self.coordinates_xy[0]
+        relative_y = self.waypoint[1] - self.coordinates_xy[1]
+        relative_x, relative_y = self.rotate_simple_case(comm, degrees, relative_x,
+                                                         relative_y)
+
+        # converting relative coordinates back to absolute
+        self.waypoint[0] = relative_x + self.coordinates_xy[0]
+        self.waypoint[1] = relative_y + self.coordinates_xy[1]
+
         for _ in range(degrees // 90):
-            relative_x = self.waypoint[0] - self.coordinates_xy[0]
-            relative_y = self.waypoint[1] - self.coordinates_xy[1]
-            relative_x, relative_y = self.rotate_simple_case(comm, relative_x, relative_y)
-
-            # converting relative coordinates back to absolute
-            self.waypoint[0] = relative_x + self.coordinates_xy[0]
-            self.waypoint[1] = relative_y + self.coordinates_xy[1]
-
             self.facing_index = (
                 (self.facing_index + 1) % 4
                 if comm == "R"
