@@ -12,8 +12,9 @@ with open("input.txt", "r") as input_file:
 
 class Ship:
     def __init__(self, raw_data: str, facing: str = "E"):
-        self.data = (re.findall(r"([A-Z]+)(\d+)", comm)[0] for comm in
-                     raw_data.splitlines())
+        self.data = (
+            re.findall(r"([A-Z]+)(\d+)", comm)[0] for comm in raw_data.splitlines()
+        )
         self.directions = ["N", "E", "S", "W"]
         self.facing = facing
         self.facing_index = [i for i, d in enumerate(self.directions) if d == facing][0]
@@ -56,7 +57,11 @@ class Ship:
         comm = command[0]
         degrees = int(command[1])
         step = degrees // 90
-        self.facing_index = (self.facing_index + step) % 4
+        self.facing_index = (
+            (self.facing_index + step) % 4
+            if comm == "R"
+            else (self.facing_index - step) % 4
+        )
         self.facing = self.directions[self.facing_index]
 
 
@@ -70,5 +75,8 @@ print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
 input_ship = Ship(INPUT)
 input_ship.move_full_path()
 x, y = input_ship.coordinates_xy
-print("Manhattan distance from initial position is", abs(x) + abs(y),
-      "(part one solution)")
+print(
+    "Manhattan distance from initial position is",
+    abs(x) + abs(y),
+    "(part one solution)",
+)
