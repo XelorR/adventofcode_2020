@@ -48,6 +48,7 @@ class Ship:
                 self.move((self.facing, command[1]))
             elif command[0] in "LR":
                 self.rotate(command)
+            print(command, self.coordinates_xy)
 
     def rotate(self, command: tuple):
         comm = command[0]
