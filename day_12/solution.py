@@ -98,6 +98,10 @@ class ShipToWaypoint(Ship):
         self.waypoint_movements[comm](units)
 
     def rotate_simple_case(self, direction: str, x: int, y: int):
+        """
+        Rotates one pair of coordinates around (0, 0)
+        Always rotates 90 degrees left or right, depending on current self.facing
+        """
         if self.facing == "N" and direction == "R":
             return y, x
         elif self.facing == "N" and direction == "L":
