@@ -16,6 +16,12 @@ class Ship:
                      raw_data.splitlines())
         self.facing = facing
         self.coordinates_xy = [0, 0]
+        self.movements = {
+            "E": self.__move_east,
+            "W": self.__move_west,
+            "N": self.__move_north,
+            "S": self.__move_south,
+        }
 
     def __move_east(self, units: int):
         self.coordinates_xy[1] += units
@@ -32,6 +38,16 @@ class Ship:
     def move(self, command: tuple):
         comm = command[0]
         units = int(command[1])
+        self.movements[comm](units)
+
+    def move_full_path(self):
+        for command in self.data:
+            if command[0] in "NWSE":
+                self.move(command)
+            elif command[0] in "FB":
+                self.move((self.facing, command[1]))
+            elif command[0] in "LR":
+                self.rotate(command)
 
     def rotate(self, command: tuple):
         comm = command[0]
@@ -39,4 +55,5 @@ class Ship:
 
 
 example_ship = Ship(EXAMPLE)
-print(list(example_ship.data))
+example_ship.move_full_path()
+print(example_ship.coordinates_xy)
