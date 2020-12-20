@@ -108,22 +108,25 @@ class ShipToWaypoint(Ship):
         Rotates one pair of coordinates around (0, 0)
         Always rotates 90 degrees left or right, depending on current self.facing
         """
-        if self.facing == "N" and direction == "R":
-            return y, x
-        elif self.facing == "N" and direction == "L":
-            return -y, x
-        elif self.facing == "W" and direction == "R":
-            return y, -x
-        elif self.facing == "W" and direction == "L":
-            return y, x
-        elif self.facing == "S" and direction == "R":
-            return y, x
-        elif self.facing == "S" and direction == "L":
-            return -y, x
-        elif self.facing == "E" and direction == "R":
-            return y, -x
-        elif self.facing == "E" and direction == "L":
-            return y, x
+        if x >= 0 and y >= 0 and direction == "R":
+            return x, -y
+        elif x >= 0 and y >= 0 and direction == "L":
+            return -x, y
+        elif x < 0 <= y and direction == "R":
+            return -x, y
+        elif x < 0 <= y and direction == "L":
+            return x, -y
+        elif x < 0 and y < 0 and direction == "R":
+            return x, -y
+        elif x < 0 and y < 0 and direction == "L":
+            return -x, y
+        elif x >= 0 > y and direction == "R":
+            return -x, y
+        elif x >= 0 > y and direction == "L":
+            return x, -y
+        else:
+            print(x, y)
+            raise TypeError
 
     def rotate(self, command: tuple):
         """
