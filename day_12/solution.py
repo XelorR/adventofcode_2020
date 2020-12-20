@@ -123,13 +123,6 @@ class ShipToWaypoint(Ship):
         degrees = int(command[1])
 
         for _ in range(360 // degrees):
-            self.facing_index = (
-                (self.facing_index + 1) % 4
-                if comm == "R"
-                else (self.facing_index - 1) % 4
-            )
-            self.facing = self.directions[self.facing_index]
-
             x_waypoint = self.waypoint[0] - self.coordinates_xy[0]
             y_waypoint = self.waypoint[1] - self.coordinates_xy[1]
             x_waypoint, y_waypoint = self.rotate_simple_case(comm, x_waypoint, y_waypoint)
@@ -137,6 +130,13 @@ class ShipToWaypoint(Ship):
             # converting relative coordinates back to absolute
             self.waypoint[0] = x_waypoint + self.coordinates_xy[0]
             self.waypoint[1] = y_waypoint + self.coordinates_xy[1]
+
+            self.facing_index = (
+                (self.facing_index + 1) % 4
+                if comm == "R"
+                else (self.facing_index - 1) % 4
+            )
+            self.facing = self.directions[self.facing_index]
 
     def move_full_path(self):
         for command in self.data:
