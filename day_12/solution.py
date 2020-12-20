@@ -27,16 +27,16 @@ class Ship:
         }
 
     def __move_east(self, units: int):
-        self.coordinates_xy[1] += units
-
-    def __move_west(self, units: int):
-        self.coordinates_xy[1] -= units
-
-    def __move_north(self, units: int):
         self.coordinates_xy[0] += units
 
-    def __move_south(self, units: int):
+    def __move_west(self, units: int):
         self.coordinates_xy[0] -= units
+
+    def __move_north(self, units: int):
+        self.coordinates_xy[1] += units
+
+    def __move_south(self, units: int):
+        self.coordinates_xy[1] -= units
 
     def move(self, command: tuple):
         comm = command[0]
