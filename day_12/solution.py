@@ -156,8 +156,10 @@ class ShipToWaypoint(Ship):
                 self.move_ship((self.facing, command[1]))
             elif command[0] in "LR":
                 self.rotate(command)
+            print(command, self.coordinates_xy, self.waypoint, self.facing)
 
 
+print("Part one")
 example_ship = Ship(EXAMPLE)
 example_ship.move_full_path()
 x, y = example_ship.coordinates_xy
@@ -174,6 +176,7 @@ print(
     "(part one solution)",
 )
 
+print("\nPart two")
 example_ship_part_two = ShipToWaypoint(EXAMPLE)
 example_ship_part_two.move_full_path()
 x, y = example_ship_part_two.coordinates_xy
