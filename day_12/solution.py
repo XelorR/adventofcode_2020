@@ -16,3 +16,4 @@ class Ship:
 
 
 example_ship = Ship(EXAMPLE)
+print(list(example_ship.data))
