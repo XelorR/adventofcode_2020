@@ -12,7 +12,8 @@ with open("input.txt", "r") as input_file:
 
 class Ship:
     def __init__(self, raw_data: str, facing: str = "E"):
-        self.data = (re.findall(r"(\w+)(\d+)", comm)[0] for comm in raw_data.splitlines())
+        self.data = (re.findall(r"([A-Z]+)(\d+)", comm)[0] for comm in
+                     raw_data.splitlines())
         self.facing = facing
         self.coordinates_xy = [0, 0]
 
@@ -29,8 +30,8 @@ class Ship:
         self.coordinates_xy[0] -= units
 
     def move(self, command: tuple):
-            comm = command[0]
-            units = int(command[1])
+        comm = command[0]
+        units = int(command[1])
 
     def rotate(self, command: tuple):
         comm = command[0]
