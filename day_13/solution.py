@@ -39,3 +39,4 @@ def part_one_answer(data: dict) -> int:
 
 
 assert part_one_answer(example_data) == 295
+print("Part one answer is", part_one_answer(input_data))
