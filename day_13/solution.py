@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 EXAMPLE = """939
 7,13,x,x,59,x,31,19"""
 
@@ -27,8 +29,11 @@ def get_bus_next_departure(timestamp, bus_number):
     )
 
 
-def get_departures(data: dict) -> dict:
-    return {b: get_bus_next_departure(data["timestamp"], b) for b in data["bus_list"]}
+def get_departures(data: dict) -> OrderedDict:
+    bus_departures = OrderedDict()
+    for b in data["bus_list"]:
+        bus_departures[b] = get_bus_next_departure(data["timestamp"], b)
+    return bus_departures
 
 
 def part_one_answer(data: dict) -> int:
