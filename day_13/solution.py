@@ -93,6 +93,22 @@ assert part_two_answer("67,x,7,59,61", 700000) == 779210
 assert part_two_answer("67,7,x,59,61", 1000000) == 1261476
 assert part_two_answer("1789,37,47,1889", 1202000000) == 1202161486
 
-print("Part two answer is", part_two_answer(INPUT, 100000000000000))
 # answer is 487905974205117
-# don't try to run this shit
+# don't try to run part_two_answer on INPUT
+
+# faster solution
+
+import csv
+import numpy as np
+
+raw = list(csv.reader(open("input.txt")))
+data = np.array([[idx, int(bus)] for idx, bus in enumerate(raw[1]) if bus != "x"])
+
+interval = 1
+time = 0
+for offset, bus in data:
+    while (time + offset) % bus != 0:
+        time += interval
+    interval = np.lcm(interval, bus)
+
+print("Part two answer is", time)
