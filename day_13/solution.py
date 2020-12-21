@@ -48,7 +48,14 @@ def part_one_answer(data: dict) -> int:
 assert part_one_answer(example_data) == 295
 print("Part one answer is", part_one_answer(input_data))
 
+
 # -= Part two =-
+
+def parse_raw_part_two(data_raw: str) -> list:
+    if len(data_raw.splitlines()) > 1:
+        return [int(b) if b != "x" else b for b in data_raw.splitlines()[1].split(",")]
+    else:
+        return [int(b) if b != "x" else b for b in data_raw.split(",")]
 
 # assert part_two_answer(example_bus_list, 1068773) == 1068781
 # assert part_two_answer([int(b) for b in "17,x,13,19".split(",") if b != "x"], 3000) == 3417
