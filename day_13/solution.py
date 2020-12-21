@@ -71,4 +71,15 @@ def part_two_answer(bus_list: list, ts: int = 1068773) -> int:
         ts += 1
 
 
-assert part_two_answer(example_bus_list) == 1068781
+assert part_two_answer(example_bus_list, 1068773) == 1068781
+# assert part_two_answer([int(b) for b in "17,x,13,19".split(",") if b != "x"], 3000) == 3417
+# assert part_two_answer([int(b) for b in "67,7,59,61".split(",") if b != "x"], 700000) == 754018
+# assert part_two_answer([int(b) for b in "67,x,7,59,61".split(",") if b != "x"], 700000) == 779210
+# assert part_two_answer([int(b) for b in "67,7,x,59,61".split(",") if b != "x"], 1000000) == 1261476
+# assert part_two_answer([int(b) for b in "1789,37,47,1889".split(",") if b != "x"], 12000000) == 1202161486
+
+print(part_two_answer([int(b) for b in "17,x,13,19".split(",") if b != "x"], 3000))
+print(part_two_answer([int(b) for b in "67,7,59,61".split(",") if b != "x"], 700000))
+print(part_two_answer([int(b) for b in "67,x,7,59,61".split(",") if b != "x"], 700000))
+print(part_two_answer([int(b) for b in "67,7,x,59,61".split(",") if b != "x"], 1000000))
+print(part_two_answer([int(b) for b in "1789,37,47,1889".split(",") if b != "x"], 12000000))
