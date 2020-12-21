@@ -92,3 +92,5 @@ assert part_two_answer("67,7,59,61", 700000) == 754018
 assert part_two_answer("67,x,7,59,61", 700000) == 779210
 assert part_two_answer("67,7,x,59,61", 1000000) == 1261476
 assert part_two_answer("1789,37,47,1889", 1202000000) == 1202161486
+
+print("Part two answer is", part_two_answer(INPUT, 100000000000000))
