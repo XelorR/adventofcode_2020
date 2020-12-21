@@ -21,5 +21,7 @@ def get_bus_next_departure(timestamp, bus_number):
     return (timestamp // bus_number + 1) * bus_number if timestamp != 0 else timestamp
 
 
-bus_nearest_departures = {b: get_bus_next_departure(example_data["timestamp"], b) for b in
-                          example_data["bus_list"]}
+def get_departures(data: dict) -> dict:
+    return {b: get_bus_next_departure(data["timestamp"], b) for
+            b in
+            data["bus_list"]}
