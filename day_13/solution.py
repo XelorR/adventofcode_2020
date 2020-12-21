@@ -13,6 +13,8 @@ def parse_raw(data_raw: str):
     }
 
 
+# -= Part one =-
+
 example_data = parse_raw(EXAMPLE)
 input_data = parse_raw(INPUT)
 
@@ -40,3 +42,8 @@ def part_one_answer(data: dict) -> int:
 
 assert part_one_answer(example_data) == 295
 print("Part one answer is", part_one_answer(input_data))
+
+# -= Part two =-
+
+example_bus_list = example_data["bus_list"]
+input_bus_list = input_data["bus_list"]
