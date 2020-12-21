@@ -58,7 +58,7 @@ def parse_raw_part_two(data_raw: str) -> list:
         return [int(b) if b != "x" else b for b in data_raw.split(",")]
 
 
-def get_departures_part_two(data_raw, timestamp: int = 3000) -> OrderedDict:
+def get_departures_part_two(data_raw, timestamp: int = 3000) -> list:
     if type(data_raw) is str:
         data = parse_raw_part_two(data_raw)
     elif type(data_raw) is list:
@@ -66,12 +66,12 @@ def get_departures_part_two(data_raw, timestamp: int = 3000) -> OrderedDict:
     else:
         raise TypeError
 
-    bus_departures = OrderedDict()
+    bus_departures = []
     for b in data:
         if type(b) is int:
-            bus_departures[b] = get_bus_next_departure(timestamp, b)
+            bus_departures.append([b, get_bus_next_departure(timestamp, b)])
         else:
-            bus_departures[b] = None
+            bus_departures.append([b, None])
     return bus_departures
 
 
@@ -79,14 +79,14 @@ def part_two_answer(data: list, ts=3000) -> int:
     bus_list = parse_raw_part_two(data)
     while True:
         bus_nearest_departures = get_departures_part_two(bus_list, ts)
-        timestamps = list(bus_nearest_departures.values())
+        timestamps = [t[1] for t in bus_nearest_departures]
         first_timestamp = timestamps[0]
         if all([(t is None or t == first_timestamp + i) for i, t in enumerate(timestamps)]):
             return first_timestamp
         ts += 1
 
 
-# assert part_two_answer(EXAMPLE, 1068773) == 1068781
+assert part_two_answer(EXAMPLE, 1068773) == 1068781
 assert part_two_answer("17,x,13,19", 3000) == 3417
 assert part_two_answer("67,7,59,61", 700000) == 754018
 assert part_two_answer("67,x,7,59,61", 700000) == 779210
