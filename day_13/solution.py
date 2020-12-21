@@ -9,6 +9,9 @@ def parse_raw(data_raw: str):
     timestamp, bus_list = data_raw.splitlines()
     return {
         "timestamp": int(timestamp),
-        "bus_list": [int(b) for b in bus_list.split(",") if
-                     b != "x"]
+        "bus_list": [int(b) for b in bus_list.split(",") if b != "x"]
     }
+
+
+example_data = parse_raw(EXAMPLE)
+input_data = parse_raw(INPUT)
