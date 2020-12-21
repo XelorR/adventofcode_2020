@@ -15,3 +15,11 @@ def parse_raw(data_raw: str):
 
 example_data = parse_raw(EXAMPLE)
 input_data = parse_raw(INPUT)
+
+
+def get_bus_next_departure(timestamp, bus_number):
+    return (timestamp // bus_number + 1) * bus_number if timestamp != 0 else timestamp
+
+
+bus_nearest_departures = {b: get_bus_next_departure(example_data["timestamp"], b) for b in
+                          example_data["bus_list"]}
