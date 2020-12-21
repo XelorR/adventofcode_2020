@@ -50,36 +50,9 @@ print("Part one answer is", part_one_answer(input_data))
 
 # -= Part two =-
 
-example_bus_list = example_data["bus_list"]
-input_bus_list = input_data["bus_list"]
-
-
-def check_one_timestamp(bus_list: list, ts: int = 1068779) -> int:
-    departures = get_departures({"timestamp": ts, "bus_list": bus_list})
-    if list(departures.values()) == sorted(departures.values()) and \
-            list(departures.values())[
-                -1
-            ] <= list(departures.values())[0] + list(departures.keys())[0]:
-        return list(departures.values())[0]
-
-
-def part_two_answer(bus_list: list, ts: int = 1068773) -> int:
-    while True:
-        timestamp = check_one_timestamp(bus_list, ts)
-        if timestamp is not None:
-            return timestamp
-        ts += 1
-
-
-assert part_two_answer(example_bus_list, 1068773) == 1068781
+# assert part_two_answer(example_bus_list, 1068773) == 1068781
 # assert part_two_answer([int(b) for b in "17,x,13,19".split(",") if b != "x"], 3000) == 3417
 # assert part_two_answer([int(b) for b in "67,7,59,61".split(",") if b != "x"], 700000) == 754018
 # assert part_two_answer([int(b) for b in "67,x,7,59,61".split(",") if b != "x"], 700000) == 779210
 # assert part_two_answer([int(b) for b in "67,7,x,59,61".split(",") if b != "x"], 1000000) == 1261476
 # assert part_two_answer([int(b) for b in "1789,37,47,1889".split(",") if b != "x"], 12000000) == 1202161486
-
-print(part_two_answer([int(b) for b in "17,x,13,19".split(",") if b != "x"], 3000))
-print(part_two_answer([int(b) for b in "67,7,59,61".split(",") if b != "x"], 700000))
-print(part_two_answer([int(b) for b in "67,x,7,59,61".split(",") if b != "x"], 700000))
-print(part_two_answer([int(b) for b in "67,7,x,59,61".split(",") if b != "x"], 1000000))
-print(part_two_answer([int(b) for b in "1789,37,47,1889".split(",") if b != "x"], 12000000))
