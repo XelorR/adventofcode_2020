@@ -97,6 +97,7 @@ assert part_two_answer("1789,37,47,1889", 1202000000) == 1202161486
 # don't try to run part_two_answer on INPUT
 
 # faster solution
+# thanks to https://dev.to/meseta/advent-of-code-day-13-using-a-lot-of-math-and-numpy-in-python-39jg
 
 import csv
 import numpy as np
