@@ -52,3 +52,23 @@ print("Part one answer is", part_one_answer(input_data))
 
 example_bus_list = example_data["bus_list"]
 input_bus_list = input_data["bus_list"]
+
+
+def check_one_timestamp(bus_list: list, ts: int = 1068779) -> int:
+    departures = get_departures({"timestamp": ts, "bus_list": bus_list})
+    if list(departures.values()) == sorted(departures.values()) and \
+            list(departures.values())[
+                -1
+            ] <= list(departures.values())[0] + list(departures.keys())[0]:
+        return list(departures.values())[0]
+
+
+def part_two_answer(bus_list: list, ts: int = 1068773) -> int:
+    while True:
+        timestamp = check_one_timestamp(bus_list, ts)
+        if timestamp is not None:
+            return timestamp
+        ts += 1
+
+
+assert part_two_answer(example_bus_list) == 1068781
