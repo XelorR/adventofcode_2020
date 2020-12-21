@@ -9,7 +9,7 @@ def parse_raw(data_raw: str):
     timestamp, bus_list = data_raw.splitlines()
     return {
         "timestamp": int(timestamp),
-        "bus_list": [int(b) for b in bus_list.split(",") if b != "x"]
+        "bus_list": [int(b) for b in bus_list.split(",") if b != "x"],
     }
 
 
@@ -18,20 +18,23 @@ input_data = parse_raw(INPUT)
 
 
 def get_bus_next_departure(timestamp, bus_number):
-    return (timestamp // bus_number + 1) * bus_number if timestamp != 0 else timestamp
+    return (
+        (timestamp // bus_number + 1) * bus_number
+        if timestamp % bus_number != 0
+        else timestamp
+    )
 
 
 def get_departures(data: dict) -> dict:
-    return {b: get_bus_next_departure(data["timestamp"], b) for
-            b in
-            data["bus_list"]}
+    return {b: get_bus_next_departure(data["timestamp"], b) for b in data["bus_list"]}
 
 
 def part_one_answer(data: dict) -> int:
     earliest_departure = min(get_departures(data).values())
     minutes_till_earliest = earliest_departure - data["timestamp"]
-    earliest_bus = \
-        [k for k, v in get_departures(data).items() if v == earliest_departure][0]
+    earliest_bus = [
+        k for k, v in get_departures(data).items() if v == earliest_departure
+    ][0]
     return earliest_bus * minutes_till_earliest
 
 
