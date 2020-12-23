@@ -35,6 +35,19 @@ class Decoder:
             [c if self.mask[i] == "X" else self.mask[i] for i, c in enumerate(number)]),
             2)
 
+    def run_program(self):
+        for c in self.program:
+            if c[0] == "mask":
+                self.mask = c[1]
+            else:
+                self.memory[c[0]] = self.apply_mask(c[1])
+
+    def get_part_one_result(self):
+        self.memory = {}
+        self.run_program()
+        return sum(self.memory.values())
+
 
 example_decoder = Decoder(EXAMPLE)
+assert example_decoder.get_part_one_result() == 165
 example_decoder.print_state()
