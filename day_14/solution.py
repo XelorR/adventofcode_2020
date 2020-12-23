@@ -14,6 +14,7 @@ class Decoder:
 
     def __init__(self, data_raw: str):
         self.program = self.parse_raw(data_raw)
+        self.mask = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
         self.memory = {}
 
     def parse_raw(self, data_raw: str):
@@ -25,7 +26,14 @@ class Decoder:
 
     def print_state(self):
         pprint(example_decoder.program)
+        pprint(example_decoder.mask)
         pprint(example_decoder.memory)
+
+    def apply_mask(self, decimal: int) -> int:
+        number = bin(decimal)[2:].zfill(36)
+        return int("".join(
+            [c if self.mask[i] == "X" else self.mask[i] for i, c in enumerate(number)]),
+            2)
 
 
 example_decoder = Decoder(EXAMPLE)
