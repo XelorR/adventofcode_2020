@@ -51,3 +51,6 @@ class Decoder:
 example_decoder = Decoder(EXAMPLE)
 assert example_decoder.get_part_one_result() == 165
 example_decoder.print_state()
+
+part_one_decoder = Decoder(INPUT)
+print("Part one answer is", part_one_decoder.get_part_one_result())
