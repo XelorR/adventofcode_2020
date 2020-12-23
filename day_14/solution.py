@@ -1,4 +1,5 @@
 import re
+from itertools import product
 from pprint import pprint
 
 EXAMPLE = """mask = XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X
@@ -62,8 +63,27 @@ print("Part one answer is", part_one_decoder.get_part_one_result())
 
 class DecoderV2(Decoder):
 
-    def apply_mask(self, decimal: int) -> int:
-        return super().apply_mask(decimal)
+    def apply_mask(self, decimal: int) -> list:
+        number = bin(decimal)[2:].zfill(36)
+        masked = []
+        for i, c in enumerate(number):
+            if self.mask[i] == "X":
+                masked.append("X")
+            elif self.mask[i] == "0":
+                masked.append(str(c))
+            else:
+                masked.append("1")
+        masked = "".join(masked)
+
+        x_possible_variants = list(product("10", repeat=masked.count("X")))
+        x_positions = [i for i, c in enumerate(masked) if c == "X"]
+        possible_variants = []
+        for i, v in enumerate(x_possible_variants):
+            masked_list = [c for c in masked]
+            for j, position in enumerate(x_positions):
+                masked_list[position] = v[j]
+            possible_variants.append(int("".join(masked_list), 2))
+        return possible_variants
 
     def run_program(self):
         super().run_program()
