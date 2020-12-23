@@ -1,6 +1,5 @@
 import re
 from itertools import product
-from pprint import pprint
 
 EXAMPLE = """mask = XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X
 mem[8] = 11
@@ -27,11 +26,6 @@ class Decoder:
             for c in data
         ]
 
-    def print_state(self):
-        pprint(example_decoder.program)
-        pprint(example_decoder.mask)
-        pprint(example_decoder.memory)
-
     def apply_mask(self, decimal: int) -> int:
         number = bin(decimal)[2:].zfill(36)
         return int("".join(
@@ -53,7 +47,6 @@ class Decoder:
 
 example_decoder = Decoder(EXAMPLE)
 assert example_decoder.get_result() == 165
-example_decoder.print_state()
 
 part_one_decoder = Decoder(INPUT)
 print("Part one answer is", part_one_decoder.get_result())
