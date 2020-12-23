@@ -10,6 +10,8 @@ with open("input.txt") as f:
     INPUT = f.read().strip()
 
 
+# -= Part one =-
+
 class Decoder:
 
     def __init__(self, data_raw: str):
@@ -54,3 +56,14 @@ example_decoder.print_state()
 
 part_one_decoder = Decoder(INPUT)
 print("Part one answer is", part_one_decoder.get_part_one_result())
+
+
+# -= Part two =-
+
+class DecoderV2(Decoder):
+
+    def apply_mask(self, decimal: int) -> int:
+        return super().apply_mask(decimal)
+
+    def run_program(self):
+        super().run_program()
