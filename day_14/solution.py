@@ -101,3 +101,6 @@ mem[26] = 1"""
 
 example_decoder_v2 = DecoderV2(EXAMPLE_V2)
 assert example_decoder_v2.get_result() == 208
+
+part_two_decoder = DecoderV2(INPUT)
+print("Part two answer is", part_two_decoder.get_result())
