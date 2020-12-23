@@ -45,18 +45,18 @@ class Decoder:
             else:
                 self.memory[c[0]] = self.apply_mask(c[1])
 
-    def get_part_one_result(self):
+    def get_result(self):
         self.memory = {}
         self.run_program()
         return sum(self.memory.values())
 
 
 example_decoder = Decoder(EXAMPLE)
-assert example_decoder.get_part_one_result() == 165
+assert example_decoder.get_result() == 165
 example_decoder.print_state()
 
 part_one_decoder = Decoder(INPUT)
-print("Part one answer is", part_one_decoder.get_part_one_result())
+print("Part one answer is", part_one_decoder.get_result())
 
 
 # -= Part two =-
@@ -86,4 +86,18 @@ class DecoderV2(Decoder):
         return possible_variants
 
     def run_program(self):
-        super().run_program()
+        for c in self.program:
+            if c[0] == "mask":
+                self.mask = c[1]
+            else:
+                for mem in self.apply_mask(c[0]):
+                    self.memory[mem] = c[1]
+
+
+EXAMPLE_V2 = """mask = 000000000000000000000000000000X1001X
+mem[42] = 100
+mask = 00000000000000000000000000000000X0XX
+mem[26] = 1"""
+
+example_decoder_v2 = DecoderV2(EXAMPLE_V2)
+assert example_decoder_v2.get_result() == 208
